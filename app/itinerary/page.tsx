@@ -25,11 +25,20 @@ export default function ItineraryPage() {
     console.log(event)
   }
   const handleDragStart = (event: DragStartEvent) => {
+    setActiveAttraction(event.active.data.current as Attraction)
     console.log('drag start')
     console.log(event)
   }
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+  )
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="flex h-screen min-h-0 flex-col overflow-hidden bg-[#f0f4f8]">
         <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between gap-4 border-b border-gray-100 bg-white p-4 shadow-sm">
           <div className="flex min-h-0 min-w-0 flex-1 items-center gap-2">
@@ -60,7 +69,7 @@ export default function ItineraryPage() {
           </button>
         </header>
         <div className="flex min-h-0 min-w-0 flex-1">
-          <aside className="flex min-h-0 w-80 flex-col overflow-y-auto border-r border-gray-300 bg-white">
+          <aside className="flex min-h-0 w-80 flex-col border-r border-gray-300 bg-white">
             <div className="border-b border-gray-300 p-4">
               <div className="flex gap-2 font-bold text-[#0d9488]">
                 <Sparkles className="h-5 w-5" />
@@ -70,7 +79,7 @@ export default function ItineraryPage() {
                 Drag attractions to your schedule
               </span>
             </div>
-            <div className="p-4">
+            <div className="p-4 overflow-y-auto">
               {attractions.map((trip) => (
                 <TravelCard
                   className="mb-4 cursor-pointer"
@@ -107,9 +116,9 @@ export default function ItineraryPage() {
       </div>
       <DragOverlay>
         {activeAttraction ? (
-          <TravelCard trip={activeAttraction} />
+          <TravelCard trip={activeAttraction} className="opacity-50 rotate-3 scale-105" />
         ) : null}
       </DragOverlay>
-    </DndContext>
+    </DndContext >
   )
-} 
+}

@@ -10,13 +10,14 @@ type TravelCardProps = {
 }
 
 export default function TravelCard({ trip, className }: TravelCardProps) {
+
   const CATEGORY_BADGE: Record<string, string> = {
     food: 'bg-amber-500/80 text-white ring-1 ring-inset ring-amber-300/30',
     culture: 'bg-indigo-500/80 text-white ring-1 ring-inset ring-indigo-300/30',
     nature: 'bg-teal-500/80 text-white ring-1 ring-inset ring-teal-300/30',
     adventure: 'bg-rose-500/80 text-white ring-1 ring-inset ring-rose-300/30',
   }
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+  const { attributes, listeners, setNodeRef, isDragging, transform } = useDraggable({
     id: trip.id,
     data: trip,
   })
@@ -28,10 +29,11 @@ export default function TravelCard({ trip, className }: TravelCardProps) {
       className={cn(
         'rounded-lg border border-gray-300 flex bg-white shadow-sm overflow-hidden',
         className,
+        isDragging && "opacity-0",
       )}
       {...attributes}
       {...listeners}
-      style={{ transform: CSS.Transform.toString(transform) }}
+      style={{ translate: CSS.Transform.toString(transform) }}
       ref={setNodeRef}
     >
       <Image
