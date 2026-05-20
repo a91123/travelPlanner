@@ -41,6 +41,7 @@ export default function TravelCard({ trip, className }: TravelCardProps) {
         alt={trip.name}
         width={80}
         height={80}
+        style={{ width: '80px', height: '80px' }}
       />
       <div className="p-4">
         <h3 className="text-lg font-semibold">{trip.name}</h3>

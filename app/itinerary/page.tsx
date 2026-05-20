@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import TravelCard from '@/components/TravelCard'
 import ScheduleSlot from '@/components/ScheduleSlot'
-import { groupSlotsByDay } from '@/lib/trip'
+import DropContainer from '@/components/DropContainer'
 import { Calendar, ArrowLeft, MapPin, Share, Sparkles } from 'lucide-react'
 import { useTripStore, Attraction } from '@/server/store/useTripStore'
 import { useState } from 'react'
@@ -14,20 +14,23 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-} from "@dnd-kit/core";
+} from '@dnd-kit/core'
 export default function ItineraryPage() {
   const { days, city, attractions, scheduleSlots } = useTripStore()
-  const slotsByDay = groupSlotsByDay(scheduleSlots)
-  const [activeAttraction, setActiveAttraction] = useState<Attraction | null>(null)
+  const [activeAttraction, setActiveAttraction] = useState<Attraction | null>(
+    null,
+  )
   const handleDragEnd = (event: DragEndEvent) => {
-    console.log('drag end')
     setActiveAttraction(null)
-    console.log(event)
+    const { active, over } = event
+    const attraction = active.data.current as Attraction
+    const dropZoneId = over?.id as string
+    if (!over) return
+    if (dropZoneId.includes('-')) {
+    }
   }
   const handleDragStart = (event: DragStartEvent) => {
     setActiveAttraction(event.active.data.current as Attraction)
-    console.log('drag start')
-    console.log(event)
   }
 
   const sensors = useSensors(
@@ -38,7 +41,11 @@ export default function ItineraryPage() {
     }),
   )
   return (
-    <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className="flex h-screen min-h-0 flex-col overflow-hidden bg-[#f0f4f8]">
         <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between gap-4 border-b border-gray-100 bg-white p-4 shadow-sm">
           <div className="flex min-h-0 min-w-0 flex-1 items-center gap-2">
@@ -95,30 +102,27 @@ export default function ItineraryPage() {
                 尚無行程，請先從首頁規劃旅行。
               </p>
             ) : (
-              Array.from({ length: days }, (_, index) => {
-                const dayNum = index + 1
-                const slotsForDay = slotsByDay[dayNum] ?? []
-                return (
-                  <div
-                    key={dayNum}
-                    className="w-72 shrink-0 snap-start scroll-mt-4"
-                  >
-                    <h3 className="mb-2 text-lg font-semibold">Day {dayNum}</h3>
-                    {slotsForDay.map((slot) => (
-                      <ScheduleSlot key={slot.id} slot={slot} />
-                    ))}
-                  </div>
-                )
-              })
+              scheduleSlots.map((slot) => (
+                <div
+                  key={slot.id}
+                  className="w-72 shrink-0 snap-start scroll-mt-4"
+                >
+                  <h3 className="mb-2 font-semibold text-sm">Day {slot.day}</h3>
+                  <DropContainer />
+                </div>
+              ))
             )}
           </main>
         </div>
       </div>
       <DragOverlay>
         {activeAttraction ? (
-          <TravelCard trip={activeAttraction} className="opacity-50 rotate-3 scale-105" />
+          <TravelCard
+            trip={activeAttraction}
+            className="opacity-50 rotate-3 scale-105"
+          />
         ) : null}
       </DragOverlay>
-    </DndContext >
+    </DndContext>
   )
 }

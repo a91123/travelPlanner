@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 import {
   type Attraction,
   type ScheduleSlotModel,
-  buildEmptyScheduleSlots,
+  buildEmptyScheduleSlots
 } from '@/lib/trip'
 
 export type { Attraction, ScheduleSlotModel }
@@ -35,18 +35,6 @@ export const useTripStore = create<TripStore>()(
     }),
     {
       name: 'trip-storage',
-      merge: (persisted, current) => {
-        const merged = {
-          ...current,
-          ...(persisted as Partial<TripStore>),
-        }
-        const days = merged.days ?? 0
-        const slots = merged.scheduleSlots
-        if (days > 0 && (!slots || slots.length === 0)) {
-          merged.scheduleSlots = buildEmptyScheduleSlots(days)
-        }
-        return merged
-      },
     },
   ),
 )
