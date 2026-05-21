@@ -8,13 +8,14 @@ export interface Attraction {
   arrivalTime?: string
 }
 
-export type ScheduleSlotModel = {
+/** 單日行程欄（右側一欄 Day N） */
+export type DaySchedule = {
   id: string
   day: number
   attractions: Attraction[]
 }
 
-export function buildEmptyScheduleSlots(days: number): ScheduleSlotModel[] {
+export function buildEmptyDaySchedules(days: number): DaySchedule[] {
   if (days < 1) return []
   return Array.from({ length: days }, (_, dayIndex) => ({
     id: `day-${dayIndex + 1}`,
