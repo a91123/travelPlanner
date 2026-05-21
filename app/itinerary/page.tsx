@@ -1,14 +1,12 @@
 'use client'
-import Link from 'next/link'
 import TravelCard from '@/app/itinerary/components/TravelCard'
-import { Calendar, ArrowLeft, MapPin, Share } from 'lucide-react'
 import { useTripStore, Attraction } from '@/server/store/useTripStore'
 import RecommendationPanel from '@/app/itinerary/components/RecommendationPanel'
 import DaySchedulePanel from '@/app/itinerary/components/DaySchedulePanel'
 import { arrayMove } from '@dnd-kit/sortable'
 import { pointerWithin } from '@dnd-kit/core'
 import { useState } from 'react'
-import Header from '@/app/itinerary/components/Header'
+import PageHeader from '@/app/itinerary/components/Header'
 import {
   DndContext,
   DragEndEvent,
@@ -122,7 +120,7 @@ export default function ItineraryPage() {
       onDragOver={handleDragOver}
     >
       <div className="flex h-screen min-h-0 flex-col overflow-hidden bg-[#f0f4f8]">
-        <Header city={city} days={days} />
+        <PageHeader city={city} days={days} />
         <div className="flex min-h-0 min-w-0 flex-1">
           <RecommendationPanel attractions={attractions} />
           <DaySchedulePanel
@@ -136,7 +134,7 @@ export default function ItineraryPage() {
         {activeAttraction ? (
           <TravelCard
             trip={activeAttraction}
-            className="opacity-50 rotate-3 scale-105"
+            className="opacity-50 rotate-3 scale-105 border border-green-300 rounded-lg"
           />
         ) : null}
       </DragOverlay>
