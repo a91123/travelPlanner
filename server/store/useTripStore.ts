@@ -18,6 +18,8 @@ interface TripStore {
   removeAttractionFromRecommendation: (id: string) => void
   removeAttractionFromDay: (dayId: string, attractionId: string) => void
   reorderDayAttractions: (dayId: string, attractions: Attraction[]) => void
+  updateArrivalTime: (slotId: string, attractionId: string, time: string) => void
+  addCustomAttraction: (attraction: Attraction) => void
 }
 
 type PersistedTrip = Partial<TripStore> & {
@@ -62,11 +64,11 @@ export const useTripStore = create<TripStore>()(
             daySchedules: state.daySchedules.map((d) =>
               d.id === dayId
                 ? {
-                    ...d,
-                    attractions: d.attractions.filter(
-                      (a) => a.id !== attractionId,
-                    ),
-                  }
+                  ...d,
+                  attractions: d.attractions.filter(
+                    (a) => a.id !== attractionId,
+                  ),
+                }
                 : d,
             ),
             attractions: attraction
@@ -82,6 +84,19 @@ export const useTripStore = create<TripStore>()(
           ),
         }))
       },
+      updateArrivalTime: (slotId: string, attractionId: string, time: string) => {
+        console.log('updateArrivalTime', slotId, attractionId, time)
+        set((state) => ({
+          daySchedules: state.daySchedules.map((day) =>
+            day.id === slotId ? { ...day, attractions: day.attractions.map((a) => a.id === attractionId ? { ...a, arrivalTime: time } : a) } : day,
+          ),
+        }))
+      },
+      addCustomAttraction: (attraction) => {
+        set((state) => ({
+          attractions: [...state.attractions, attraction],
+        }))
+      }
     }),
     {
       name: 'trip-storage',

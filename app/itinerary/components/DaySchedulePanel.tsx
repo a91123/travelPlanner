@@ -32,6 +32,7 @@ const DaySchedulePanel = ({
                     <ScheduledAttractionCard
                       key={attraction.id}
                       attraction={attraction}
+                      slotId={day.id}
                       onRemove={() =>
                         removeAttractionFromDay(day.id, attraction.id)
                       }

@@ -16,7 +16,7 @@ export async function getAttractionRecommendations(
     - name: 景點名稱
     - category: 分類（food/culture/nature/adventure其中一個）
     - description: 一句話介紹
-    - duration: 建議停留時間（例如：1-2 hours）
+    - duration: 建議停留小時數（只回傳數字，例如：1-2）
     - image: 景點照片URL (如果沒有照片，請使用https://picsum.photos/seed/${name}/200/200)
     - id: 景點ID (隨機生成)
     只回傳JSON格式，不要其他文字：

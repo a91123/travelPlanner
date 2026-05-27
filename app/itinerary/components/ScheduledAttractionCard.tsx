@@ -3,14 +3,16 @@ import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-
+import { useTripStore } from '@/server/store/useTripStore'
 export default function ScheduledAttractionCard({
   attraction,
   className,
   onRemove,
+  slotId,
 }: {
   className?: string
   attraction: Attraction
+  slotId: string
   onRemove: () => void
 }) {
   const {
@@ -29,6 +31,7 @@ export default function ScheduledAttractionCard({
     transition,
     opacity: isDragging ? 0.5 : 1,
   }
+  const { updateArrivalTime } = useTripStore()
   return (
     <div
       style={style}
@@ -60,6 +63,20 @@ export default function ScheduledAttractionCard({
           推薦停留時間: {attraction.duration}
         </p>
         <p className="text-sm font-medium truncate">{attraction.name}</p>
+        <p className="text-xs text-gray-500">
+          抵達時間:
+          <input
+            type="text"
+            placeholder="--:--"
+            value={attraction.arrivalTime || ''}
+            onChange={(e) =>
+              updateArrivalTime(slotId, attraction.id, e.target.value)
+            }
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
+            className="text-xs text-gray-500 outline-none cursor-text w-12 ml-2"
+          />
+        </p>
       </div>
     </div>
   )

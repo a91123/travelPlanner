@@ -53,7 +53,7 @@ export default function TravelCard({ trip, className }: TravelCardProps) {
             {trip.category}
           </span>{' '}
           <Clock className="w-3 h-3 mr-1 inline-block text-xs text-gray-500" />{' '}
-          <span className="text-xs text-gray-500">{trip.duration}</span>
+          <span className="text-xs text-gray-500">{trip.duration} hours</span>
         </p>
       </div>
     </div>
