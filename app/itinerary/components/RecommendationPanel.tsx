@@ -3,11 +3,14 @@ import TravelCard from './TravelCard'
 import { Attraction } from '@/server/store/useTripStore'
 import AddAttractionModal from './AddAttractionModal'
 import { useState, useRef } from 'react'
+import { useI18n } from '@/lib/i18n'
+
 const RecommendationPanel = ({
   attractions,
 }: {
   attractions: Attraction[]
 }) => {
+  const { t } = useI18n()
   const [showModal, setShowModal] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
 
@@ -23,10 +26,10 @@ const RecommendationPanel = ({
       <div className="border-b border-gray-300 p-4">
         <div className="flex gap-2 font-bold text-[#0d9488]">
           <Sparkles className="h-5 w-5" />
-          <h2 className="font-semibold">AI Recommendations</h2>
+          <h2 className="font-semibold">{t.aiRecommendations}</h2>
         </div>
         <span className="text-sm text-gray-500">
-          Drag attractions to your schedule
+          {t.dragAttractions}
         </span>
       </div>
       <div className="p-4 overflow-y-auto flex-1" ref={listRef}>
@@ -45,7 +48,7 @@ const RecommendationPanel = ({
           className="w-full flex items-center justify-center gap-2 py-2 rounded-lg border-2 border-dashed border-gray-300 text-gray-500 hover:border-teal-500 hover:text-teal-500 transition-colors cursor-pointer"
         >
           <span className="text-lg">+</span>
-          <span className="text-sm">新增自訂景點</span>
+          <span className="text-sm">{t.addCustomAttraction}</span>
         </button>
       </div>
       {/* Modal */}

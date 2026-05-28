@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 import { getAttractionRecommendations } from '@/server/api/gemini'
 import { useRouter } from 'next/navigation'
 import { useTripStore } from '@/server/store/useTripStore'
+import { useI18n } from '@/lib/i18n'
 import toast from 'react-hot-toast'
 import {
   MapPin,
@@ -15,32 +16,14 @@ import {
   Plane,
   Check,
 } from 'lucide-react'
+
 export default function TravelPlannerForm() {
+  const { t } = useI18n()
   const preferences = [
-    {
-      id: 'food',
-      label: 'Food',
-      icon: Utensils,
-      description: 'Local cuisine & restaurants',
-    },
-    {
-      id: 'culture',
-      label: 'Culture',
-      icon: Landmark,
-      description: 'Museums & heritage sites',
-    },
-    {
-      id: 'nature',
-      label: 'Nature',
-      icon: TreePine,
-      description: 'Parks & scenic views',
-    },
-    {
-      id: 'adventure',
-      label: 'Adventure',
-      icon: Mountain,
-      description: 'Thrilling experiences',
-    },
+    { id: 'food', label: t.food, icon: Utensils, description: t.foodDesc },
+    { id: 'culture', label: t.culture, icon: Landmark, description: t.cultureDesc },
+    { id: 'nature', label: t.nature, icon: TreePine, description: t.natureDesc },
+    { id: 'adventure', label: t.adventure, icon: Mountain, description: t.adventureDesc },
   ]
   const router = useRouter()
   const { setTrip } = useTripStore()
@@ -57,7 +40,7 @@ export default function TravelPlannerForm() {
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!city) {
-      toast.error('Please enter a city name')
+      toast.error(t.enterCityError)
       setCityError(true)
       return
     }
@@ -73,7 +56,7 @@ export default function TravelPlannerForm() {
       router.push('/itinerary')
     } catch (error) {
       setLoading(false)
-      toast.error('Failed to generate itinerary')
+      toast.error(t.generateError)
     }
   }
   return (
@@ -81,13 +64,11 @@ export default function TravelPlannerForm() {
       onSubmit={handleSubmit}
       className="w-full max-w-xl bg-white rounded-2xl p-8 shadow-lg mt-8"
     >
-      {/* 城市輸入 */}
-
       <label
         htmlFor="city"
         className="block text-sm font-medium text-gray-700 mb-2"
       >
-        Where do you want to go?
+        {t.whereToGo}
       </label>
       <div className="mb-6 relative">
         <MapPin className="absolute left-4 top-1/2 h-5 w-5 transform -translate-y-1/2 text-gray-400" />
@@ -101,7 +82,7 @@ export default function TravelPlannerForm() {
             }
           }}
           type="text"
-          placeholder="Enter city name..."
+          placeholder={t.cityPlaceholder}
           className={cn(
             'w-full h-12 px-4 pl-12 border border-gray-200 rounded-xl text-base outline-none focus:border-teal-500',
             cityError ? 'border-red-500' : '',
@@ -110,7 +91,7 @@ export default function TravelPlannerForm() {
       </div>
       <label className="text-sm font-medium text-foreground flex items-center gap-2">
         <Calendar className="h-4 w-4 text-muted-foreground" />
-        How many days?
+        {t.howManyDays}
       </label>
       <div className="flex items-center gap-4 mb-8">
         <input
@@ -172,7 +153,7 @@ export default function TravelPlannerForm() {
         )}
       >
         <Plane className="h-6 w-6" />
-        {loading ? 'Generating...' : 'Start Planning'}
+        {loading ? t.generating : t.startPlanning}
       </button>
     </form>
   )

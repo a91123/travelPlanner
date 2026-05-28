@@ -60,7 +60,7 @@ export default function ScheduledAttractionCard({
       />
       <div className="flex-1 min-w-0">
         <p className="text-xs text-gray-500">
-          推薦停留時間: {attraction.duration}
+          推薦停留時間: {attraction.duration} hours
         </p>
         <p className="text-sm font-medium truncate">{attraction.name}</p>
         <p className="text-xs text-gray-500">
