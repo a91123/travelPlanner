@@ -38,6 +38,7 @@ export interface Translations {
   attractionNamePlaceholder: string
   category: string
   suggestedDuration: string
+  estimatedDuration: string
   durationPlaceholder: string
   hours: string
   cancel: string
@@ -86,6 +87,7 @@ const translations: Record<Locale, Translations> = {
     attractionNamePlaceholder: '輸入景點名稱',
     category: '分類',
     suggestedDuration: '建議停留時間',
+    estimatedDuration: '預計停留時間',
     durationPlaceholder: '例如：1-2',
     hours: '小時',
     cancel: '取消',
@@ -130,6 +132,7 @@ const translations: Record<Locale, Translations> = {
     attractionNamePlaceholder: 'Enter attraction name',
     category: 'Category',
     suggestedDuration: 'Suggested Duration',
+    estimatedDuration: 'Estimated Duration',
     durationPlaceholder: 'e.g. 1-2',
     hours: 'hours',
     cancel: 'Cancel',

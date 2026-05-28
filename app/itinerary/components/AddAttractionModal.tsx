@@ -26,9 +26,10 @@ export default function AddAttractionModal({
       id: `custom-${Date.now()}`,
       name: name.trim(),
       category,
-      duration: duration || '1-2 hours',
+      duration: duration || '1-2',
       rating: 0,
       image: '',
+      isCustom: true,
     }
 
     addCustomAttraction(newAttraction)
@@ -94,7 +95,7 @@ export default function AddAttractionModal({
 
         <div className="mb-6">
           <label className="text-sm font-medium text-gray-700 block mb-1">
-            {t.suggestedDuration}
+            {t.estimatedDuration}
           </label>
           <div className="flex items-center gap-2">
             <input

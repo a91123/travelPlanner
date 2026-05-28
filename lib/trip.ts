@@ -6,6 +6,7 @@ export interface Attraction {
   rating: number
   image: string
   arrivalTime?: string
+  isCustom?: boolean
 }
 
 /** 單日行程欄（右側一欄 Day N） */

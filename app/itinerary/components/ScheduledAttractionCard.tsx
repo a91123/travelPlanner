@@ -64,7 +64,7 @@ export default function ScheduledAttractionCard({
       />
       <div className="flex-1 min-w-0">
         <p className="text-xs text-gray-500">
-          {t.suggestedDuration}: {attraction.duration} {t.hours}
+          {attraction.isCustom ? t.estimatedDuration : t.suggestedDuration}: {attraction.duration} {t.hours}
         </p>
         <p className="text-sm font-medium truncate">{attraction.name}</p>
         <p className="text-xs text-gray-500">
