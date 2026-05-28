@@ -8,20 +8,29 @@ import { useI18n } from '@/lib/i18n'
 export default function Home() {
   const { t } = useI18n()
   return (
-    <main className="min-h-screen flex flex-col p-8 bg-[#f0f4f8] items-center">
-      <header className="relative flex items-center justify-center mb-6 pt-16 font-bold font-serif w-full max-w-xl">
-        <div className="flex items-center">
-          <Compass className="h-12 w-12 p-2 bg-[#0d9488] rounded-xl text-white mr-4" />
-          <h1 className="text-4xl font-bold">Travel Planner</h1>
+    <main className="min-h-screen flex flex-col items-center bg-[#f0f4f8] px-4 pb-16">
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSwitcher />
+      </div>
+
+      <header className="flex flex-col items-center gap-3 mt-16 mb-6">
+        <div className="w-16 h-16 bg-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+          <Compass className="h-9 w-9 text-white" />
         </div>
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 pt-16">
-          <LanguageSwitcher />
-        </div>
+        <h1 className="text-3xl font-bold text-gray-800 tracking-tight">
+          {t.appTitle}
+        </h1>
       </header>
-      <section>
-        <h2 className="text-2xl font-bold text-center mb-3">{t.appSubtitle}</h2>
-        <h3 className="text-lg text-center">{t.appDescription}</h3>
+
+      <section className="text-center mb-8 max-w-sm">
+        <h2 className="text-lg font-semibold text-gray-700 mb-2">
+          {t.appSubtitle}
+        </h2>
+        <p className="text-sm text-gray-500 leading-relaxed">
+          {t.appDescription}
+        </p>
       </section>
+
       <TravelPlannerForm />
     </main>
   )
