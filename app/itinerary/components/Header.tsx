@@ -34,7 +34,7 @@ const Header = ({ city, days }: { city: string; days: number }) => {
       <div className="flex items-center gap-3">
         <LanguageSwitcher />
         <button
-          onClick={() => copyTripToClipboard(city, daySchedules)}
+          onClick={() => copyTripToClipboard(city, daySchedules, t)}
           type="button"
           className="flex shrink-0 cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-[#0d9488] px-3 py-2 text-sm text-white shadow-sm hover:bg-[#0d9488]/90"
         >

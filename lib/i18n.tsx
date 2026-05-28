@@ -42,6 +42,10 @@ export interface Translations {
   hours: string
   cancel: string
   add: string
+  arrivalTime: string
+  noAttractionsScheduled: string
+  copySuccess: string
+  tripTitle: (city: string) => string
 }
 
 const translations: Record<Locale, Translations> = {
@@ -86,6 +90,10 @@ const translations: Record<Locale, Translations> = {
     hours: '小時',
     cancel: '取消',
     add: '新增',
+    arrivalTime: '抵達時間',
+    noAttractionsScheduled: '尚未安排景點',
+    copySuccess: '行程已複製到剪貼簿！',
+    tripTitle: (city) => `${city} 行程`,
   },
   en: {
     appTitle: 'Travel Planner',
@@ -126,6 +134,10 @@ const translations: Record<Locale, Translations> = {
     hours: 'hours',
     cancel: 'Cancel',
     add: 'Add',
+    arrivalTime: 'Arrival time',
+    noAttractionsScheduled: 'No attractions scheduled',
+    copySuccess: 'Itinerary copied to clipboard!',
+    tripTitle: (city) => `${city} Itinerary`,
   },
 }
 

@@ -1,9 +1,12 @@
+'use client'
+
 import type { Attraction } from '@/lib/trip'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useTripStore } from '@/server/store/useTripStore'
+import { useI18n } from '@/lib/i18n'
 export default function ScheduledAttractionCard({
   attraction,
   className,
@@ -32,6 +35,7 @@ export default function ScheduledAttractionCard({
     opacity: isDragging ? 0.5 : 1,
   }
   const { updateArrivalTime } = useTripStore()
+  const { t } = useI18n()
   return (
     <div
       style={style}
@@ -60,11 +64,11 @@ export default function ScheduledAttractionCard({
       />
       <div className="flex-1 min-w-0">
         <p className="text-xs text-gray-500">
-          推薦停留時間: {attraction.duration} hours
+          {t.suggestedDuration}: {attraction.duration} {t.hours}
         </p>
         <p className="text-sm font-medium truncate">{attraction.name}</p>
         <p className="text-xs text-gray-500">
-          抵達時間:
+          {t.arrivalTime}:
           <input
             type="text"
             placeholder="--:--"

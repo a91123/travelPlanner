@@ -1,15 +1,19 @@
+'use client'
+
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import type { Attraction } from '@/server/store/useTripStore'
 import { Clock } from 'lucide-react'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
+import { useI18n } from '@/lib/i18n'
+
 type TravelCardProps = {
   trip: Attraction
   className?: string
 }
 
 export default function TravelCard({ trip, className }: TravelCardProps) {
+  const { t } = useI18n()
   const CATEGORY_BADGE: Record<string, string> = {
     food: 'bg-amber-500/80 text-white ring-1 ring-inset ring-amber-300/30',
     culture: 'bg-indigo-500/80 text-white ring-1 ring-inset ring-indigo-300/30',
@@ -46,14 +50,14 @@ export default function TravelCard({ trip, className }: TravelCardProps) {
         <p className="text-sm text-gray-500 flex items-center">
           <span
             className={cn(
-              'inline-flex items-center mr-2 rounded-full px-2 py-0.5 text-xs font-medium capitalize',
+              'inline-flex items-center mr-2 rounded-full px-2 py-0.5 text-xs font-medium',
               badgeClass,
             )}
           >
-            {trip.category}
+            {t.categoryLabel(trip.category)}
           </span>{' '}
           <Clock className="w-3 h-3 mr-1 inline-block text-xs text-gray-500" />{' '}
-          <span className="text-xs text-gray-500">{trip.duration} hours</span>
+          <span className="text-xs text-gray-500">{trip.duration} {t.hours}</span>
         </p>
       </div>
     </div>
