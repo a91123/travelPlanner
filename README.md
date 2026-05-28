@@ -39,3 +39,4 @@ npm run dev
 ```
 
 ## 📸 截圖
+<img width="1512" height="792" alt="截圖 2026-05-28 上午11 29 02" src="https://github.com/user-attachments/assets/9734bfc1-62e1-46c8-824a-1711fd26c1f7" />
