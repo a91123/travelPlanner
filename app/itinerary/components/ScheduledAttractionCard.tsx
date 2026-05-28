@@ -46,7 +46,7 @@ export default function ScheduledAttractionCard({
       {...attributes}
       {...listeners}
       className={cn(
-        'rounded-lg border border-gray-200 bg-white p-2 shadow-sm mb-2 relative',
+        'rounded-lg border cursor-grab border-gray-200 bg-white p-2 shadow-sm mb-2 relative',
         className,
       )}
     >
