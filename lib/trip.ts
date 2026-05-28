@@ -7,6 +7,7 @@ export interface Attraction {
   image: string
   arrivalTime?: string
   isCustom?: boolean
+  note?: string
 }
 
 /** 單日行程欄（右側一欄 Day N） */

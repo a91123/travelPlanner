@@ -19,6 +19,7 @@ interface TripStore {
   removeAttractionFromDay: (dayId: string, attractionId: string) => void
   reorderDayAttractions: (dayId: string, attractions: Attraction[]) => void
   updateArrivalTime: (slotId: string, attractionId: string, time: string) => void
+  updateAttractionNote: (dayId: string, attractionId: string, note: string) => void
   addCustomAttraction: (attraction: Attraction) => void
 }
 
@@ -96,7 +97,21 @@ export const useTripStore = create<TripStore>()(
         set((state) => ({
           attractions: [...state.attractions, attraction],
         }))
-      }
+      },
+      updateAttractionNote: (dayId, attractionId, note) => {
+        set((state) => ({
+          daySchedules: state.daySchedules.map((day) =>
+            day.id === dayId
+              ? {
+                  ...day,
+                  attractions: day.attractions.map((a) =>
+                    a.id === attractionId ? { ...a, note } : a
+                  ),
+                }
+              : day
+          ),
+        }))
+      },
     }),
     {
       name: 'trip-storage',
