@@ -1,6 +1,6 @@
 'use client'
 import TravelCard from '@/app/itinerary/components/TravelCard'
-import { useTripStore, Attraction } from '@/server/store/useTripStore'
+import { useTripStore, Attraction } from '@/store/useTripStore'
 import RecommendationPanel from '@/app/itinerary/components/RecommendationPanel'
 import DaySchedulePanel from '@/app/itinerary/components/DaySchedulePanel'
 import { arrayMove } from '@dnd-kit/sortable'

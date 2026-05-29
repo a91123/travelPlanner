@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowLeft, MapPin, Calendar, Share } from 'lucide-react'
 import { copyTripToClipboard } from '@/lib/copy'
-import { useTripStore } from '@/server/store/useTripStore'
+import { useTripStore } from '@/store/useTripStore'
 import { useI18n } from '@/lib/i18n'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
@@ -28,7 +28,9 @@ const Header = ({ city, days }: { city: string; days: number }) => {
             {city}
           </span>
           <Calendar className="h-4 w-4 shrink-0 text-gray-500" />
-          <span className="shrink-0 text-sm font-sans">{days} {t.days}</span>
+          <span className="shrink-0 text-sm font-sans">
+            {days} {t.days}
+          </span>
         </div>
       </div>
       <div className="flex items-center gap-3">

@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { getAttractionRecommendations } from '@/server/api/gemini'
+import { getAttractionRecommendations } from '@/lib/api/gemini'
 import { useRouter } from 'next/navigation'
-import { useTripStore } from '@/server/store/useTripStore'
+import { useTripStore } from '@/store/useTripStore'
 import { useI18n } from '@/lib/i18n'
 import toast from 'react-hot-toast'
 import {
@@ -21,9 +21,24 @@ export default function TravelPlannerForm() {
   const { t } = useI18n()
   const preferences = [
     { id: 'food', label: t.food, icon: Utensils, description: t.foodDesc },
-    { id: 'culture', label: t.culture, icon: Landmark, description: t.cultureDesc },
-    { id: 'nature', label: t.nature, icon: TreePine, description: t.natureDesc },
-    { id: 'adventure', label: t.adventure, icon: Mountain, description: t.adventureDesc },
+    {
+      id: 'culture',
+      label: t.culture,
+      icon: Landmark,
+      description: t.cultureDesc,
+    },
+    {
+      id: 'nature',
+      label: t.nature,
+      icon: TreePine,
+      description: t.natureDesc,
+    },
+    {
+      id: 'adventure',
+      label: t.adventure,
+      icon: Mountain,
+      description: t.adventureDesc,
+    },
   ]
   const router = useRouter()
   const { setTrip } = useTripStore()
@@ -48,7 +63,11 @@ export default function TravelPlannerForm() {
     }
     setLoading(true)
     try {
-      const recommendations = await getAttractionRecommendations(city, days, categories)
+      const recommendations = await getAttractionRecommendations(
+        city,
+        days,
+        categories,
+      )
       setLoading(false)
       setTrip(city, days, recommendations.attractions)
       router.push('/itinerary')
@@ -120,7 +139,9 @@ export default function TravelPlannerForm() {
               key={preference.id}
               className={cn(
                 'relative py-6 px-4 cursor-pointer bg-white border-2 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all hover:border-teal-400',
-                isSelected ? 'border-teal-500 bg-teal-50/40' : 'border-gray-200',
+                isSelected
+                  ? 'border-teal-500 bg-teal-50/40'
+                  : 'border-gray-200',
               )}
             >
               {isSelected && (

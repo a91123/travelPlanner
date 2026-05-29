@@ -2,7 +2,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import type { DaySchedule } from '@/lib/trip'
 import ScheduledAttractionCard from './ScheduledAttractionCard'
 import { DayColumn } from './DayColumn'
-import { useTripStore } from '@/server/store/useTripStore'
+import { useTripStore } from '@/store/useTripStore'
 import { useI18n } from '@/lib/i18n'
 
 const DaySchedulePanel = ({
@@ -23,7 +23,9 @@ const DaySchedulePanel = ({
       ) : (
         daySchedules.map((day) => (
           <div key={day.id} className="w-72 shrink-0 snap-start scroll-mt-4">
-            <h3 className="mb-2 font-semibold text-sm">{t.formatDay(day.day)}</h3>
+            <h3 className="mb-2 font-semibold text-sm">
+              {t.formatDay(day.day)}
+            </h3>
             <DayColumn day={day} isOver={activeDayId === day.id}>
               <div className="flex-1 overflow-y-auto gap-2 flex flex-col mb-2 px-2">
                 <SortableContext

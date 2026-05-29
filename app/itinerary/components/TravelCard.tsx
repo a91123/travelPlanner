@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import type { Attraction } from '@/server/store/useTripStore'
+import type { Attraction } from '@/store/useTripStore'
 import { Clock } from 'lucide-react'
 import { useDraggable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
@@ -57,7 +57,9 @@ export default function TravelCard({ trip, className }: TravelCardProps) {
             {t.categoryLabel(trip.category)}
           </span>{' '}
           <Clock className="w-3 h-3 mr-1 inline-block text-xs text-gray-500" />{' '}
-          <span className="text-xs text-gray-500">{trip.duration} {t.hours}</span>
+          <span className="text-xs text-gray-500">
+            {trip.duration} {t.hours}
+          </span>
         </p>
       </div>
     </div>

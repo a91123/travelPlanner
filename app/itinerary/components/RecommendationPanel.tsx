@@ -1,6 +1,6 @@
 import { Sparkles } from 'lucide-react'
 import TravelCard from './TravelCard'
-import { Attraction } from '@/server/store/useTripStore'
+import { Attraction } from '@/store/useTripStore'
 import AddAttractionModal from './AddAttractionModal'
 import { useState, useRef } from 'react'
 import { useI18n } from '@/lib/i18n'
@@ -28,9 +28,7 @@ const RecommendationPanel = ({
           <Sparkles className="h-5 w-5" />
           <h2 className="font-semibold">{t.aiRecommendations}</h2>
         </div>
-        <span className="text-sm text-gray-500">
-          {t.dragAttractions}
-        </span>
+        <span className="text-sm text-gray-500">{t.dragAttractions}</span>
       </div>
       <div className="p-4 overflow-y-auto flex-1" ref={listRef}>
         {attractions.map((trip) => (

@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { useTripStore } from '@/server/store/useTripStore'
+import { useTripStore } from '@/store/useTripStore'
 import { useI18n } from '@/lib/i18n'
 import type { Attraction } from '@/lib/trip'
 
